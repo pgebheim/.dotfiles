@@ -1,0 +1,9 @@
+Host github.com gitlab.com
+  IdentityFile ~/.ssh/github_rsa
+
+Host 52.86.168.15
+  IdentityFile ~/.ssh/production_deploy_rsa
+
+Host 147.75.82.47 147.75.69.213 159.89.135.211 34.227.226.126
+  IdentityFile ~/.ssh/id_rsa
+  
