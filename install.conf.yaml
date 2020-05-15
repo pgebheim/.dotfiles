@@ -11,5 +11,9 @@
     ~/.tmux.conf: tmux.conf
     ~/.zprofile: zprofile
     ~/.zshrc: zshrc
+    ~/.vim: vim
+    ~/.vimrc:
+      relink: true
+      path: vimrc
 
 
