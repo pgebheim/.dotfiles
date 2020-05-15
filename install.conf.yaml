@@ -5,6 +5,8 @@
     ~/.bash_profile: bash_profile
     ~/.bashrc: bashrc
     ~/.bash_logout: bash_logout
+    ~/.gitconfig: gitconfig
+    ~/.gitshrc: gitshrc
     ~/.ssh/config:
         path: ssh/config
         create: true
