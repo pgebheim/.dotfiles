@@ -90,7 +90,7 @@ export pager='less -FRX'
 export DOCKERCLOUD_NAMESPACE=augurproject
 
 # Rust
-source $HOME/.cargo/env
+[ -r $HOME/.cargo/env ] && . $HOME/.cargo/env
 
 setopt sharehistory
 

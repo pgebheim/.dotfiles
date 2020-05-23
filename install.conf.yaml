@@ -10,6 +10,14 @@
     ~/.ssh/config:
         path: ssh/config
         create: true
+    ~/.config/nvim/init.vim:
+        path: vimrc
+        relink: true
+        create: true
+    ~/.local/share/nvim/site:
+        path: vim
+        relink: true
+        create: true
     ~/.tmux.conf: tmux.conf
     ~/.zprofile: zprofile
     ~/.zshrc: zshrc
