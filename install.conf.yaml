@@ -19,6 +19,7 @@
         relink: true
         create: true
     ~/.tmux.conf: tmux.conf
+    ~/.tmux: tmux
     ~/.zprofile: zprofile
     ~/.zshrc: zshrc
     ~/.vim: vim
