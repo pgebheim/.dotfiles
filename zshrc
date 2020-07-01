@@ -1,5 +1,5 @@
 
-eval "$(keychain --eval --agents ssh github_rsa id_rsa)"
+eval "$(keychain --eval --agents ssh github_rsa id_rsa id_ecdsa)"
 
 # Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
 # Initialization code that may require console input (password prompts, [y/n]
@@ -82,7 +82,15 @@ vack() { vim -c "Ack \"${@}\"" }
 
 # eval "$(rbenv init -)" 
 
+export SAVEHIST=100000
+export HISTSIZE=100000
 export HISTFILE=~/.zsh_history
+#append into history file
+setopt INC_APPEND_HISTORY
+#save only one command if 2 common are same and consistent
+setopt HIST_IGNORE_DUPS
+#add timestamp for each entry
+setopt EXTENDED_HISTORY 
 export GOPATH=$HOME/go
 export PATH="$HOME/.yarn/bin:$PATH:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/snap/bin:$HOME/.local/bin:$HOME/.rvm/bin:$GOROOT/bin:$GOPATH/bin"
 
