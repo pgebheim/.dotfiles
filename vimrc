@@ -61,7 +61,7 @@ Plug 'Shougo/vimproc.vim', {
 
 if has("nvim")
   Plug 'radenling/vim-dispatch-neovim'
-  Plug 'mhartington/nvim-typescript', {'do': './install.sh'}
+  "Plug 'mhartington/nvim-typescript', {'do': './install.sh'}
   "Plug 'neoclide/coc.nvim', {'tag': '*', 'do': { -> coc#util#install()}}
   let $NVIM_NODE_LOG_FILE='/tmp/nvim-node.log'
   "let $NVIM_NODE_LOG_LEVEL='info'
@@ -71,7 +71,7 @@ if has("nvim")
   "  \ }
 
   Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
-  let g:deoplete#enable_at_startup = 1
+  "let g:deoplete#enable_at_startup = 1
 endif
 
 

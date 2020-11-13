@@ -71,7 +71,7 @@ alias ccat='~/.local/bin/pygmentize -g'
 alias vim=nvim
 alias yaml2js="python -c 'import sys, yaml, json; json.dump(yaml.load(sys.stdin), sys.stdout, indent=4)'"
 alias dh="dirs -v" # nicer list for directory history
-alias in3='docker run slockit/in3'
+alias t='todo.sh'
 
 fe() { vim -c ":FZF" }
 vack() { vim -c "Ack \"${@}\"" }
