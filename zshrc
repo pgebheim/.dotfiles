@@ -1,5 +1,5 @@
 
-eval "$(keychain --eval --agents ssh id_ecdsa github_rsa pg_dev)"
+eval "$(keychain --eval --agents ssh id_ecdsa github_rsa pg_dev id_ecdsa)"
 
 # Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
 # Initialization code that may require console input (password prompts, [y/n]
@@ -71,7 +71,7 @@ alias ccat='~/.local/bin/pygmentize -g'
 alias vim=nvim
 alias yaml2js="python -c 'import sys, yaml, json; json.dump(yaml.load(sys.stdin), sys.stdout, indent=4)'"
 alias dh="dirs -v" # nicer list for directory history
-alias in3='docker run slockit/in3'
+alias t='todo.sh'
 
 fe() { vim -c ":FZF" }
 vack() { vim -c "Ack \"${@}\"" }
@@ -89,6 +89,12 @@ export HISTSIZE=1000000
 export SAVEHIST=$HISTSIZE
 export HISTFILESIZE=1000000
 export HISTFILE=~/.zsh_history
+#append into history file
+setopt INC_APPEND_HISTORY
+#save only one command if 2 common are same and consistent
+setopt HIST_IGNORE_DUPS
+#add timestamp for each entry
+setopt EXTENDED_HISTORY 
 export GOPATH=$HOME/go
 export PATH="$HOME/.yarn/bin:$PATH:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/snap/bin:$HOME/.local/bin:$HOME/.rvm/bin:$GOROOT/bin:$GOPATH/bin"
 
