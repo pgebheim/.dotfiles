@@ -1,5 +1,5 @@
 
-eval "$(keychain --eval --agents ssh github_rsa id_rsa)"
+eval "$(keychain --eval --agents ssh id_ecdsa github_rsa pg_dev)"
 
 # Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
 # Initialization code that may require console input (password prompts, [y/n]
@@ -82,6 +82,12 @@ vack() { vim -c "Ack \"${@}\"" }
 
 # eval "$(rbenv init -)" 
 
+setopt hist_ignore_all_dups
+setopt hist_ignore_space
+
+export HISTSIZE=1000000
+export SAVEHIST=$HISTSIZE
+export HISTFILESIZE=1000000
 export HISTFILE=~/.zsh_history
 export GOPATH=$HOME/go
 export PATH="$HOME/.yarn/bin:$PATH:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/snap/bin:$HOME/.local/bin:$HOME/.rvm/bin:$GOROOT/bin:$GOPATH/bin"
@@ -98,6 +104,10 @@ bindkey '^[[1;5C' forward-word                    # [Ctrl-RightArrow] - move for
 bindkey '^[[1;5D' backward-word                   # [Ctrl-LeftArrow] - move backward one word 
 bindkey "^[[A" history-search-backward            # start typing + [Up-Arrow] - fuzzy find history forward  
 bindkey "^[[B" history-search-forward             # start typing + [Down-Arrow] - fuzzy find history backward
+
+function ipfs() {
+    docker exec ipfs_host ipfs "$@"
+}
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh

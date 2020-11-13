@@ -32,6 +32,7 @@ Plug 'mattn/webapi-vim'
 Plug 'mattn/gist-vim'
 Plug 'hashivim/vim-terraform'
 Plug 'tpope/vim-characterize'
+Plug 'posva/vim-vue'
 Plug 'bling/vim-airline'
 Plug 'scrooloose/nerdtree'
 Plug 'Xuyuanp/nerdtree-git-plugin'
@@ -39,12 +40,15 @@ Plug 'jamessan/vim-gnupg'
 Plug 'digitaltoad/vim-jade'
 Plug 'janko-m/vim-test'
 Plug 'mileszs/ack.vim'
+Plug 'isobit/vim-caddyfile'
 Plug 'HerringtonDarkholme/yats.vim'
+Plug 'tomlion/vim-solidity'
 Plug 'pangloss/vim-javascript'
 Plug 'jason0x43/vim-js-indent'
 Plug 'editorconfig/editorconfig-vim'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': 'yes \| ./install' }
 Plug 'junegunn/fzf.vim'
+Plug 'chrisbra/csv.vim'
 Plug 'prettier/vim-prettier', {
   \ 'do': 'yarn install',
   \ 'for': ['javascript', 'typescript', 'css', 'less', 'scss', 'json', 'graphql'] }
@@ -61,16 +65,16 @@ Plug 'Shougo/vimproc.vim', {
 
 if has("nvim")
   Plug 'radenling/vim-dispatch-neovim'
-  Plug 'mhartington/nvim-typescript', {'do': './install.sh'}
+  "Plug 'mhartington/nvim-typescript', {'do': './install.sh'}
   "Plug 'neoclide/coc.nvim', {'tag': '*', 'do': { -> coc#util#install()}}
   let $NVIM_NODE_LOG_FILE='/tmp/nvim-node.log'
-  "let $NVIM_NODE_LOG_LEVEL='info'
+  let $NVIM_NODE_LOG_LEVEL='info'
   "Plug 'autozimu/LanguageClient-neovim', {
   "  \ 'branch': 'next',
   "  \ 'do': 'bash install.sh',
   "  \ }
 
-  Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+  "Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
   let g:deoplete#enable_at_startup = 1
 endif
 
@@ -168,6 +172,8 @@ inoremap <S-Tab> <ESC><<i
 nnoremap j gj
 nnoremap k gk
 nnoremap K i<CR><Esc>
+nnoremap <Leader>] :cnext<CR>
+nnoremap <Leader>[ :cprevious<CR>
 inoremap <C-s> <Esc>
 
 runtime macros/matchit.vim
