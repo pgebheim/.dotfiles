@@ -23,6 +23,7 @@
     ~/.tmux: tmux
     ~/.zprofile: zprofile
     ~/.zshrc: zshrc
+    ~/.zsh_plugins.txt: zsh_plugins.txt
     ~/.vim: vim
     ~/.local/bin/antidote:
         path: antidote/antidote
