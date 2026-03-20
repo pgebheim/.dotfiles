@@ -4,7 +4,7 @@
 	signingkey = ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIMwNMFGbQxT1/4D5WyoPPjtzeQBUHgtN3kS62mKi7Y97
 [core]
 	editor = vim
-	excludesfile = /Users/pgebheim/.gitignore_global
+	excludesfile = ~/.gitignore_global
 [alias]
 	lg = log --graph --pretty=oneline --abbrev-commit --decorate
 	current = describe --all --match 'heads/*'
@@ -72,6 +72,6 @@
 [gpg]
 	format = ssh
 [gpg "ssh"]
-	program = /Applications/1Password.app/Contents/MacOS/op-ssh-sign
+	program = ~/.local/bin/op-ssh-sign
 [commit]
 	gpgsign = true

@@ -24,6 +24,9 @@
     ~/.zprofile: zprofile
     ~/.zshrc: zshrc
     ~/.vim: vim
+    ~/.local/bin/op-ssh-sign:
+        path: local/bin/op-ssh-sign
+        create: true
     ~/.vimrc:
       relink: true
       path: vimrc

@@ -9,8 +9,14 @@ fi
 # .zshrc
 # Lazy-load antidote and generate the static load file only when needed
 zsh_plugins=${ZDOTDIR:-$HOME}/.zsh_plugins
-antidote_path="/opt/homebrew/opt/antidote/share/antidote/"
-if [[ ! ${zsh_plugins}.zsh -nt ${zsh_plugins}.txt ]]; then
+if [[ -d /opt/homebrew/opt/antidote/share/antidote ]]; then
+  antidote_path="/opt/homebrew/opt/antidote/share/antidote"
+elif [[ -d /home/linuxbrew/.linuxbrew/opt/antidote/share/antidote ]]; then
+  antidote_path="/home/linuxbrew/.linuxbrew/opt/antidote/share/antidote"
+elif [[ -d /usr/share/zsh-antidote ]]; then
+  antidote_path="/usr/share/zsh-antidote"
+fi
+if [[ -n "$antidote_path" && ! ${zsh_plugins}.zsh -nt ${zsh_plugins}.txt ]]; then
   (
     source ${antidote_path}/antidote.zsh
     antidote bundle <${zsh_plugins}.txt >${zsh_plugins}.zsh
@@ -63,7 +69,11 @@ export FZF_DEFAULT_COMMAND='ag --hidden --ignore .git --ignore node_modules -g "
 
 export EDITOR='nvim'
 
-alias ls='ls -FGa --color=auto'
+if [[ "$(uname)" == "Darwin" ]]; then
+  alias ls='ls -FGa'
+else
+  alias ls='ls -Fa --color=auto'
+fi
 alias e='$EDITOR'
 alias g='git'
 alias ccat='~/.local/bin/pygmentize -g'
@@ -121,7 +131,7 @@ function ipfs() {
 [ -f ~/.config/linear/config.zsh ] && source ~/.config/linear/config.zsh
 
 # bun completions
-[ -s "/Users/paul/.bun/_bun" ] && source "/Users/paul/.bun/_bun"
+[ -s "$HOME/.bun/_bun" ] && source "$HOME/.bun/_bun"
 
 # bun
 export BUN_INSTALL="$HOME/.bun"

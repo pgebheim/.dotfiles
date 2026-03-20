@@ -78,7 +78,10 @@ set noswapfile
 set nobackup
 
 set wildmenu
-set rtp+=/opt/homebrew/opt/fzf
+let s:fzf_path = substitute(system('which fzf'), '/fzf\n$', '', '')
+if !empty(s:fzf_path) && isdirectory(s:fzf_path)
+  let &rtp .= ',' . s:fzf_path
+endif
 set wildmode=longest:list,full
 set wildignore+=*.o,*.obj,.git,*.swp,*.pyc
 set wildignore+=*vim/backups*

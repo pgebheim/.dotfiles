@@ -1,1 +1,1 @@
-vim.cmd('source ' .. vim.fn.stdpath('config') .. '/init.vim')
+vim.cmd('source ' .. vim.fn.stdpath('config') .. '/config.vim')
