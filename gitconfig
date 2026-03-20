@@ -72,6 +72,6 @@
 [gpg]
 	format = ssh
 [gpg "ssh"]
-	program = ~/.local/bin/op-ssh-sign
+	program = op-ssh-sign
 [commit]
 	gpgsign = true
