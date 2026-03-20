@@ -9,13 +9,7 @@ fi
 # .zshrc
 # Lazy-load antidote and generate the static load file only when needed
 zsh_plugins=${ZDOTDIR:-$HOME}/.zsh_plugins
-if [[ -d /opt/homebrew/opt/antidote/share/antidote ]]; then
-  antidote_path="/opt/homebrew/opt/antidote/share/antidote"
-elif [[ -d /home/linuxbrew/.linuxbrew/opt/antidote/share/antidote ]]; then
-  antidote_path="/home/linuxbrew/.linuxbrew/opt/antidote/share/antidote"
-elif [[ -d /usr/share/zsh-antidote ]]; then
-  antidote_path="/usr/share/zsh-antidote"
-fi
+antidote_path="${HOME}/.antidote"
 if [[ -n "$antidote_path" && ! ${zsh_plugins}.zsh -nt ${zsh_plugins}.txt ]]; then
   (
     source ${antidote_path}/antidote.zsh
