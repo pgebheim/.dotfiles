@@ -25,9 +25,7 @@
     ~/.zshrc: zshrc
     ~/.zsh_plugins.txt: zsh_plugins.txt
     ~/.vim: vim
-    ~/.local/bin/antidote:
-        path: antidote/antidote
-        create: true
+    ~/.antidote: antidote
     ~/.local/bin/op-ssh-sign:
         path: local/bin/op-ssh-sign
         create: true
