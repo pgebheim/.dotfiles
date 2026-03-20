@@ -10,9 +10,10 @@
     ~/.ssh/config:
         path: ssh/config
         create: true
-    ~/.config/nvim/init.vim:
-        path: vimrc
+    ~/.config/nvim:
+        path: nvim
         relink: true
+        force: true
         create: true
     ~/.local/share/nvim/site:
         path: vim

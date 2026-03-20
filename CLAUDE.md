@@ -12,7 +12,11 @@ Paul's personal dotfiles, managed with [dotbot](https://github.com/anishathalye/
 
 | File/Dir | Purpose |
 |---|---|
-| `vimrc` | Vim/Neovim config (symlinked to both `~/.vimrc` and `~/.config/nvim/init.vim`) |
+| `nvim/` | Neovim config directory — symlinked to `~/.config/nvim` |
+| `nvim/init.lua` | Neovim entry point (sources `init.vim` for now) |
+| `nvim/init.vim` | Cleaned VimScript config (active neovim config) |
+| `nvim/lua/` | Future Lua modules (options, keymaps, plugins) |
+| `vimrc` | Legacy vim config — symlinked to `~/.vimrc` (may become stale) |
 | `vim/` | Vim runtime files (colors, autoload, spell) — symlinked to `~/.vim` and neovim site |
 | `zshrc` | Zsh config (antidote plugin manager, p10k prompt) |
 | `tmux.conf` | Tmux config (prefix is `C-a`, uses tpm for plugins) |
@@ -35,9 +39,11 @@ Paul's personal dotfiles, managed with [dotbot](https://github.com/anishathalye/
 
 ## Working with these files
 
-- After editing `vimrc`, vim auto-sources on save. Otherwise `:source %` or restart.
+- **Neovim config lives in `nvim/`** — edit `nvim/init.vim` for VimScript changes. The Lua entry point (`nvim/init.lua`) sources it automatically.
+- Future Lua migration: move chunks from `nvim/init.vim` into `nvim/lua/*.lua` files and `require()` them from `init.lua`.
+- After editing neovim config, `:source %` or restart nvim.
 - After editing `tmux.conf`, reload with `tmux source ~/.tmux.conf` or `prefix + I` for plugins.
 - After editing `zshrc`, reload with `source ~/.zshrc` or open a new shell.
 - Run `./install` after adding new symlink entries to `install.conf.yaml`.
-- Vim plugins: add `Plug '...'` lines in vimrc, then run `:PlugInstall` in vim.
+- Vim plugins: add `Plug '...'` lines in `nvim/init.vim`, then run `:PlugInstall` in nvim.
 - Tmux plugins: add `set -g @plugin '...'` lines in tmux.conf, then `prefix + I` to install.

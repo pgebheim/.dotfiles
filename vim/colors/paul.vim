@@ -43,8 +43,8 @@ hi DiffChange   guibg=darkmagenta   ctermbg=magenta     cterm=none
 hi DiffDelete   guifg=Blue          guibg=DarkCyan      ctermfg=blue    ctermbg=cyan gui=bold
 hi DiffText     cterm=bold          ctermbg=red         gui=bold        guibg=Red
 
-hi Cursor       guifg=#000020 guibg=#ffaf38 ctermfg=none ctermbg=brown
-hi lCursor      guifg=#ffffff guibg=#000000 ctermfg=none ctermbg=darkgreen
+hi Cursor       guifg=#000020 guibg=#ffaf38 ctermfg=none ctermbg=cyan
+hi lCursor      guifg=#ffffff guibg=#000000 ctermfg=none ctermbg=cyan
 
 hi Comment      guifg=#80a0dd       ctermfg=darkred
 hi Constant     ctermfg=magenta     guifg=#ffa0a0 cterm=none

@@ -1,7 +1,7 @@
 [user]
 	name = Paul Gebheim
-	email = pgebheim@gmail.com
-	signingkey = E5E02393651AC03E
+	email = pgebheim@users.noreply.github.com
+	signingkey = ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIMwNMFGbQxT1/4D5WyoPPjtzeQBUHgtN3kS62mKi7Y97
 [core]
 	editor = vim
 	excludesfile = /Users/pgebheim/.gitignore_global
@@ -49,10 +49,6 @@
 	insteadOf = me:
 	insteadOf = pg:
 	insteadOf = pgebheim:
-[url "git@github.com:AugurProject/"]
-  insteadOf = augur:
-[url "git@github.com:ethereumjs/"]
-  insteadOf = ethereumjs:
 [credential]
 	helper = ssh-agent
 [filter "media"]
@@ -73,3 +69,9 @@
 	clean = git-lfs clean -- %f
 [rerere]
 	enabled = true
+[gpg]
+	format = ssh
+[gpg "ssh"]
+	program = /Applications/1Password.app/Contents/MacOS/op-ssh-sign
+[commit]
+	gpgsign = true
