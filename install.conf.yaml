@@ -27,9 +27,8 @@
     ~/.zsh_plugins.txt: zsh_plugins.txt
     ~/.vim: vim
     ~/.antidote: antidote
-    ~/.local/bin/op-ssh-sign:
-        path: local/bin/op-ssh-sign
-        create: true
+    ~/.local/bin/op-ssh-sign: local/bin/op-ssh-sign
+    ~/.local/bin/install-ai-tools: local/bin/install-ai-tools
     ~/.vimrc:
       relink: true
       path: vimrc
