@@ -93,7 +93,7 @@ augroup filetypes
   au FileType ruby,rb,javascript,html set sw=2 ts=2
   au FileType python set sw=4 ts=4
   au Filetype gitcommit set spell textwidth=72
-  au FileType markdown set spell textwidth=120 wrap
+  au FileType markdown setlocal spell textwidth=120 wrap linebreak nonumber norelativenumber
 
   function! SetEMCAOptions()
     nmap <buffer> <Leader>e <Plug>(TSRename)
