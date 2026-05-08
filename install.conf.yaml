@@ -15,24 +15,17 @@
         relink: true
         force: true
         create: true
-    ~/.local/share/nvim/site:
-        path: vim
-        relink: true
-        create: true
     ~/.tmux.conf: tmux.conf
     ~/.tmux: tmux
     ~/.zprofile: zprofile
     ~/.p10k.zsh: p10k.zsh
     ~/.zshrc: zshrc
     ~/.zsh_plugins.txt: zsh_plugins.txt
-    ~/.vim: vim
+    ~/.vim: nvim
     ~/.antidote: antidote
     ~/.local/bin/op-ssh-sign: local/bin/op-ssh-sign
     ~/.local/bin/install-ai-tools: local/bin/install-ai-tools
-    ~/.vimrc:
-      relink: true
-      path: vimrc
 
 - shell:
   - [git submodule update --init --recursive, Installing submodules]
-  - [nvim +PlugInstall +qall, Installing vim plugins]
+  - [nvim --headless "+Lazy! sync" +qa, Installing nvim plugins]
