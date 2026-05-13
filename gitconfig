@@ -49,8 +49,8 @@
 	insteadOf = me:
 	insteadOf = pg:
 	insteadOf = pgebheim:
-[credential]
-	helper = ssh-agent
+#[credential]
+#	helper = ssh-agent
 [filter "media"]
 	clean = git-media-clean %f
 	smudge = git-media-smudge %f
