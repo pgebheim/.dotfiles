@@ -12,6 +12,28 @@ return {
     priority = 1000,
     config = function()
       vim.cmd.colorscheme("nightfly")
+      for _, group in ipairs({
+        "Normal", "NormalNC", "SignColumn",
+        "EndOfBuffer", "VertSplit", "WinSeparator",
+        "FoldColumn",
+      }) do
+        vim.api.nvim_set_hl(0, group, { bg = "NONE" })
+      end
+      -- Floating windows (Lazy, fzf, completion) keep an opaque panel for contrast
+      local float_bg = "#1a1d2e"
+      vim.api.nvim_set_hl(0, "NormalFloat", { bg = float_bg })
+      vim.api.nvim_set_hl(0, "FloatBorder", { bg = float_bg, fg = "#3a3f5c" })
+      vim.api.nvim_set_hl(0, "FloatTitle",  { bg = float_bg, fg = "#82aaff", bold = true })
+      vim.api.nvim_set_hl(0, "Pmenu",       { bg = float_bg })
+      vim.api.nvim_set_hl(0, "PmenuSel",    { bg = "#3a3f5c", bold = true })
+      vim.api.nvim_set_hl(0, "PmenuSbar",   { bg = float_bg })
+      vim.api.nvim_set_hl(0, "PmenuThumb",  { bg = "#3a3f5c" })
+      vim.api.nvim_set_hl(0, "LineNr",       { bg = "NONE", fg = "#6c7086" })
+      vim.api.nvim_set_hl(0, "LineNrAbove",  { bg = "NONE", fg = "#6c7086" })
+      vim.api.nvim_set_hl(0, "LineNrBelow",  { bg = "NONE", fg = "#6c7086" })
+      vim.api.nvim_set_hl(0, "CursorLineNr", { bg = "NONE", fg = "#82aaff", bold = true })
+      vim.api.nvim_set_hl(0, "CursorLine",   { bg = "NONE" })
+      vim.api.nvim_set_hl(0, "Visual",       { bg = "#3a3f5c" })
     end,
   },
   {
@@ -80,6 +102,9 @@ return {
         '--graph --color=always --format="%C(auto)%h%d %s %C(black)%C(bold)%cr"'
       vim.g.fzf_tags_command = "ctags -R"
       vim.g.fzf_commands_expect = "alt-enter,ctrl-x"
+      vim.g.fzf_layout = {
+        window = { width = 0.9, height = 0.7, border = "rounded" },
+      }
       if vim.fn.executable("rg") == 1 then
         vim.env.FZF_DEFAULT_COMMAND = "rg --files -S"
       elseif vim.fn.executable("ag") == 1 then
@@ -180,7 +205,11 @@ return {
         style = "normal",
       },
       bullet = { icons = { "•", "◦", "▪", "▫" } },
-      checkbox = { enabled = true },
+      checkbox = {
+        enabled = true,
+        unchecked = { icon = "󰄱 ", highlight = "RenderMarkdownUnchecked" },
+        checked   = { icon = "󰄵 ", highlight = "RenderMarkdownChecked" },
+      },
       quote = { icon = "▍" },
       dash = { icon = "─" },
       pipe_table = { style = "normal" },
@@ -196,9 +225,13 @@ return {
       local cream  = "#FAFB75"
       local mute1  = "#A0A0A0"
       local mute2  = "#6E6E6E"
-      local code_bg = "#1F1F1F"
+      local code_bg = "#161b22"
       local code_fg = "#E5E5E5"
       local hr      = "#5C5C5C"
+      local warm    = "#FAB387"  -- bold (peach)
+      local cool    = "#B4BEFE"  -- italic (lavender)
+      local green   = "#A6E3A1"
+      local red     = "#F25D94"
 
       set(0, "RenderMarkdownH1",   { fg = "#FFFFFF", bold = true })
       set(0, "RenderMarkdownH1Bg", { bg = purple, fg = "#FFFFFF", bold = true })
@@ -224,6 +257,21 @@ return {
       set(0, "RenderMarkdownLink",     { fg = blue, underline = true })
       set(0, "RenderMarkdownTableHead",{ fg = pink, bold = true })
       set(0, "RenderMarkdownTableRow", { fg = code_fg })
+
+      -- Checkboxes
+      set(0, "RenderMarkdownChecked",   { fg = green })
+      set(0, "RenderMarkdownUnchecked", { fg = mute2 })
+
+      -- Callouts (> [!NOTE], > [!TIP], etc.)
+      set(0, "RenderMarkdownInfo",    { fg = blue,   bold = true })
+      set(0, "RenderMarkdownSuccess", { fg = green,  bold = true })
+      set(0, "RenderMarkdownHint",    { fg = purple, bold = true })
+      set(0, "RenderMarkdownWarn",    { fg = cream,  bold = true })
+      set(0, "RenderMarkdownError",   { fg = red,    bold = true })
+
+      -- Differentiated emphasis: warm bold, cool italic
+      set(0, "@markup.strong.markdown_inline", { fg = warm, bold = true })
+      set(0, "@markup.italic.markdown_inline", { fg = cool, italic = true })
     end,
   },
 }

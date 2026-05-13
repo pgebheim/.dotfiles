@@ -3,7 +3,7 @@
 	email = pgebheim@users.noreply.github.com
 	signingkey = ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIMwNMFGbQxT1/4D5WyoPPjtzeQBUHgtN3kS62mKi7Y97
 [core]
-	editor = vim
+	editor = nvim
 	excludesfile = ~/.gitignore_global
 [alias]
 	lg = log --graph --pretty=oneline --abbrev-commit --decorate
@@ -71,7 +71,7 @@
 	enabled = true
 [gpg]
 	format = ssh
-[gpg "ssh"]
-	program = op-ssh-sign
 [commit]
-	gpgsign = true
+	gpgsign = false
+[init]
+	defaultBranch = main

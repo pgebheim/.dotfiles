@@ -80,10 +80,7 @@ nnoremap <Leader>] :cnext<CR>
 nnoremap <Leader>[ :cprevious<CR>
 inoremap <C-s> <Esc>
 
-augroup cursors
-  au InsertEnter * set cursorline
-  au InsertLeave * set nocursorline
-augroup END
+set cursorline
 
 augroup filetypes
   autocmd!

@@ -22,46 +22,20 @@ source ${zsh_plugins}.zsh
 autoload -Uz compinit
 compinit
 
-[[ $TMUX != "" ]] && export TERM="screen-256color"
-
-###################################################
-# #zplugin
-#
-
-# #zplugin customization goes here
-#zplugin light zdharma/zui
-#zplugin light zdharma/zplugin-crasis
-
-# Powerlevel 10k for awesome prompts
-#zplugin ice depth=1; zplugin light romkatv/powerlevel10k
-
-# npm
-#zplugin light 'lukechilds/zsh-better-npm-completion'
+# [[ $TMUX != "" ]] && export TERM="tmux-256color"
+COLORTERM="truecolor"
 
 # fzf binary, completion, and zsh key bindings
-export FZF_DEFAULT_OPTS='--height 40% --reverse --border --preview="chroma --style=solarized-dark {}"'
 export FZF_DEFAULT_COMMAND='ag --hidden --ignore .git --ignore node_modules -g ""'
-#zplugin ice from"gh-r" as"program"; zplugin load junegunn/fzf-bin
-#zplugin snippet 'https://github.com/junegunn/fzf/blob/master/shell/key-bindings.zsh'
-#zplugin snippet 'https://github.com/junegunn/fzf/blob/master/shell/completion.zsh'
-
-# diff-so-fancy
-#zplugin ice as"program" pick"bin/git-dsf" wait"0" lucid
-#zplugin light zdharma/zsh-diff-so-fancy
-
-# completions from prezto
-#zplugin snippet PZT::modules/completion/init.zsh
-
-# autojump for `j` support
-#zplugin snippet OMZ::plugins/autojump/autojump.plugin.zsh
-
-# needs to be run before last plugin is loaded
-#zplugin ice atinit"autoload compinit; mkdir -p $HOME/.cache/zsh; compinit -d $HOME/.cache/zsh/zcompdump-$ZSH_VERSION; zpcdreplay" wait"1" silent
-#zplugin light zdharma/fast-syntax-highlighting
-
-# User configuration
+export FZF_DEFAULT_OPTS='
+    --height 40% --reverse --border
+    --color=bg+:#3a3f5c,bg:#1a1d2e,fg:#c3ccdc,fg+:#ffffff
+    --color=hl:#82aaff,hl+:#82aaff,info:#a1cd5e
+    --color=prompt:#82aaff,pointer:#FAB387,marker:#A6E3A1
+    --color=spinner:#FAB387,header:#7c8898,border:#3a3f5c'
 
 export EDITOR='nvim'
+export VISUAL='nvim'
 
 if [[ "$(uname)" == "Darwin" ]]; then
   alias ls='ls -FGa'
@@ -129,4 +103,15 @@ function ipfs() {
 
 # bun
 export BUN_INSTALL="$HOME/.bun"
-export PATH="$BUN_INSTALL/bin:$HOME/.local/bin:$PATH"
+export GO_HOME="$HOME/go"
+export PATH="$GO_HOME/bin:$BUN_INSTALL/bin:$HOME/.local/bin:$PATH"
+
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+
+export RTK_TELEMETRY_DISABLED=1
+
+# Added by flyctl installer
+export FLYCTL_INSTALL="/home/arch/.fly"
+export PATH="$FLYCTL_INSTALL/bin:$PATH"
