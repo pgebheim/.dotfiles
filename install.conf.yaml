@@ -17,6 +17,7 @@
         create: true
     ~/.tmux.conf: tmux.conf
     ~/.tmux: tmux
+    ~/.zshenv: zshenv
     ~/.zprofile: zprofile
     ~/.p10k.zsh: p10k.zsh
     ~/.zshrc: zshrc
