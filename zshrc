@@ -22,6 +22,9 @@ source ${zsh_plugins}.zsh
 autoload -Uz compinit
 compinit
 
+# Persist forwarded SSH agent socket so mosh/tmux reattaches can reuse it.
+[ -f ~/.local/bin/ssh-agent-sock.sh ] && source ~/.local/bin/ssh-agent-sock.sh
+
 # [[ $TMUX != "" ]] && export TERM="tmux-256color"
 COLORTERM="truecolor"
 

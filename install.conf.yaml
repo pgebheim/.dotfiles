@@ -25,6 +25,7 @@
     ~/.antidote: antidote
     ~/.local/bin/op-ssh-sign: local/bin/op-ssh-sign
     ~/.local/bin/install-ai-tools: local/bin/install-ai-tools
+    ~/.local/bin/ssh-agent-sock.sh: local/bin/ssh-agent-sock.sh
 
 - shell:
   - [git submodule update --init --recursive, Installing submodules]
