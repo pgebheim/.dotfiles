@@ -4,8 +4,12 @@
 Include ~/.ssh/config.local
 
 # Tailnet hosts — trusted, agent forwarding on.
+# ForwardAgent points at 1Password's macOS socket explicitly so the carrier
+# (and any other ssh -A) forwards the 1Password agent regardless of what
+# $SSH_AUTH_SOCK happens to be in the launchd / shell env. Harmless on
+# non-Mac clients (ssh logs a warning and skips forwarding).
 Host nami claw zoro ohara
   User arch
-  ForwardAgent yes
+  ForwardAgent "~/Library/Group Containers/2BUA8C4S2C.com.1password/t/agent.sock"
   ServerAliveInterval 30
   ServerAliveCountMax 3
