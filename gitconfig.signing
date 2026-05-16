@@ -1,0 +1,23 @@
+# Opt-in commit/tag signing via SSH key.
+#
+# Activate on a machine by symlinking this file into $HOME:
+#   ln -s ~/.dotfiles/gitconfig.signing ~/.gitconfig.signing
+#
+# The main gitconfig has `[include] path = ~/.gitconfig.signing`, which git
+# silently ignores when the file is missing. Symlinking enables signing on
+# that machine; deleting the symlink turns it off.
+#
+# The signing key itself is set in the main gitconfig under [user] signingkey
+# (same pubkey as auth). It must be present in whatever ssh-agent the local
+# `ssh-keygen` reaches — 1Password locally on the laptop, the forwarded agent
+# on tailnet hosts.
+#
+# For GitHub to show commits as "Verified", register the same pubkey under
+# Settings → SSH and GPG keys → "New SSH key" with key type "Signing key".
+
+[gpg]
+	format = ssh
+[commit]
+	gpgsign = true
+[tag]
+	gpgsign = true

@@ -69,7 +69,8 @@
 	gpgsign = false
 [init]
 	defaultBranch = main
-#[gpg]
-#	format = ssh
-#[gpg "ssh"]
-#	program = /Applications/1Password.app/Contents/MacOS/op-ssh-sign
+# Per-machine opt-in commit signing. Symlink ~/.dotfiles/gitconfig.signing
+# into ~/.gitconfig.signing on machines that should sign; missing file is
+# silently ignored.
+[include]
+	path = ~/.gitconfig.signing
