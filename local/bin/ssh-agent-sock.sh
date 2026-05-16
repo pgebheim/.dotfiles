@@ -7,6 +7,7 @@
 # connections (mosh handshakes, ssh host cmd) would otherwise overwrite the
 # carrier's stable target with their own about-to-die socket.
 
-if [ -z "$SSH_AUTH_SOCK" ] && [ -S "$HOME/.ssh/agent_sock" ]; then
+if { [ -z "$SSH_AUTH_SOCK" ] || [ ! -S "$SSH_AUTH_SOCK" ]; } \
+   && [ -S "$HOME/.ssh/agent_sock" ]; then
   export SSH_AUTH_SOCK="$HOME/.ssh/agent_sock"
 fi
