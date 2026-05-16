@@ -1,11 +1,18 @@
 #!/usr/bin/env bash
-# Open a long-lived SSH connection with agent forwarding to HOST and keep it
-# alive. On the remote, point ~/.ssh/agent_sock at the live forwarded socket
+# Open a long-lived `tailscale ssh` connection with agent forwarding to HOST
+# and keep it alive.
+#
+# tailscale ssh uses tailnet identity (WireGuard auth) for the connection, so
+# no SSH key is consulted on the auth step — and the 1Password agent doesn't
+# get pinged for Touch ID on (re)connect. The forwarded $SSH_AUTH_SOCK still
+# points at the laptop's 1Password agent, so remote operations that actually
+# use keys (git push, ssh-add -l, etc.) prompt Touch ID at the right time.
+#
+# On the remote, ~/.ssh/agent_sock is repointed at the live forwarded socket
 # so mosh shells and detached tmux panes can find an agent.
 #
-# Designed to be supervised by launchd (macOS) or systemd — when this process
-# exits (network drop, server reboot, etc.) the supervisor respawns it, which
-# re-points the remote symlink at the new forwarded socket.
+# Designed to be supervised by launchd (macOS). When this process exits
+# (network drop, server reboot, sleep/wake) the supervisor respawns it.
 #
 # Usage: ssh-carrier HOST
 
@@ -13,7 +20,7 @@ set -euo pipefail
 
 host=${1:?usage: ssh-carrier HOST}
 
-exec ssh \
+exec /usr/local/bin/tailscale ssh \
   -T -A \
   -o ServerAliveInterval=30 \
   -o ServerAliveCountMax=2 \
