@@ -1,4 +1,7 @@
-
+- defaults:
+    link:
+      create: true   # create parent directories as needed
+      relink: true   # optional, helps if links already exist
 
 - link:
     ~/.profile: profile
@@ -9,12 +12,9 @@
     ~/.gitshrc: gitshrc
     ~/.ssh/config:
         path: ssh/config
-        create: true
     ~/.config/nvim:
         path: nvim
-        relink: true
         force: true
-        create: true
     ~/.tmux.conf: tmux.conf
     ~/.tmux: tmux
     ~/.zshenv: zshenv
