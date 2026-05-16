@@ -5,6 +5,7 @@ Include ~/.ssh/config.local
 
 # Tailnet hosts — trusted, agent forwarding on.
 Host nami claw zoro ohara
+  User arch
   ForwardAgent yes
   ServerAliveInterval 30
   ServerAliveCountMax 3
