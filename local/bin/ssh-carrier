@@ -1,12 +1,15 @@
 #!/usr/bin/env bash
-# Open a long-lived `tailscale ssh` connection with agent forwarding to HOST
-# and keep it alive.
+# Open a long-lived SSH connection with agent forwarding to HOST and keep it
+# alive.
 #
-# tailscale ssh uses tailnet identity (WireGuard auth) for the connection, so
-# no SSH key is consulted on the auth step — and the 1Password agent doesn't
-# get pinged for Touch ID on (re)connect. The forwarded $SSH_AUTH_SOCK still
-# points at the laptop's 1Password agent, so remote operations that actually
-# use keys (git push, ssh-add -l, etc.) prompt Touch ID at the right time.
+# Assumes Tailscale SSH is enabled on the remote (`tailscale set --ssh` on the
+# host). With that, tailscaled handles the SSH server side and accepts `none`
+# auth based on WireGuard-verified tailnet identity — so no SSH key is sent,
+# no 1Password Touch ID prompt fires on (re)connect.
+#
+# The forwarded $SSH_AUTH_SOCK still points at the laptop's 1Password agent,
+# so remote operations that actually use keys (git push, ssh-add -l, etc.)
+# prompt Touch ID at the right time.
 #
 # On the remote, ~/.ssh/agent_sock is repointed at the live forwarded socket
 # so mosh shells and detached tmux panes can find an agent.
@@ -20,7 +23,7 @@ set -euo pipefail
 
 host=${1:?usage: ssh-carrier HOST}
 
-exec /usr/local/bin/tailscale ssh \
+exec ssh \
   -T -A \
   -o ServerAliveInterval=30 \
   -o ServerAliveCountMax=2 \
