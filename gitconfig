@@ -49,15 +49,11 @@
 	insteadOf = me:
 	insteadOf = pg:
 	insteadOf = pgebheim:
-#[credential]
-#	helper = ssh-agent
 [filter "media"]
 	clean = git-media-clean %f
 	smudge = git-media-smudge %f
 [difftool]
 	prompt = false
-[url "ssh://git@heroku.com/"]
-	insteadOf = https://git.heroku.com/
 [grep]
 	excludeDefault = true
 [github]
@@ -69,9 +65,11 @@
 	clean = git-lfs clean -- %f
 [rerere]
 	enabled = true
-[gpg]
-	format = ssh
 [commit]
 	gpgsign = false
 [init]
 	defaultBranch = main
+#[gpg]
+#	format = ssh
+#[gpg "ssh"]
+#	program = /Applications/1Password.app/Contents/MacOS/op-ssh-sign
