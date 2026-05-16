@@ -27,7 +27,16 @@
     ~/.local/bin/op-ssh-sign: local/bin/op-ssh-sign
     ~/.local/bin/install-ai-tools: local/bin/install-ai-tools
     ~/.local/bin/ssh-agent-sock.sh: local/bin/ssh-agent-sock.sh
+    ~/.local/bin/ssh-carrier: local/bin/ssh-carrier
 
 - shell:
   - [git submodule update --init --recursive, Installing submodules]
   - [nvim --headless "+Lazy! sync" +qa, Installing nvim plugins]
+  - command: |
+      if [ "$(uname)" = "Darwin" ]; then
+        mkdir -p ~/Library/LaunchAgents
+        for f in "$PWD"/macos/LaunchAgents/*.plist; do
+          ln -sfn "$f" ~/Library/LaunchAgents/"$(basename "$f")"
+        done
+      fi
+    description: Link macOS LaunchAgents

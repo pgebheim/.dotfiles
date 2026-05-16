@@ -2,3 +2,9 @@
 # First match wins, so list host-specific blocks there before any shared
 # defaults below.
 Include ~/.ssh/config.local
+
+# Tailnet hosts — trusted, agent forwarding on.
+Host nami claw zoro ohara
+  ForwardAgent yes
+  ServerAliveInterval 30
+  ServerAliveCountMax 3
