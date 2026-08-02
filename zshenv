@@ -4,7 +4,7 @@
 
 export EDITOR='nvim'
 export VISUAL='nvim'
-export TERM="tmux-256color"
+#export TERM="tmux-256color"
 export COLORTERM="truecolor"
 export pager='less -FRX'
 
