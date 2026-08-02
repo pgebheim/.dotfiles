@@ -122,6 +122,14 @@ return {
 
   -- Languages
   "godlygeek/tabular",
+  {
+    "dhruvasagar/vim-table-mode",
+    cmd = { "TableModeToggle", "TableModeEnable", "TableModeRealign", "Tableize" },
+    ft = { "markdown" },
+    init = function()
+      vim.g.table_mode_corner = "|"
+    end,
+  },
   "hashivim/vim-terraform",
   "posva/vim-vue",
   "digitaltoad/vim-jade",
