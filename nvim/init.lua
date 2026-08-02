@@ -15,5 +15,6 @@ end
 vim.opt.rtp:prepend(lazypath)
 
 require("lazy").setup("plugins")
+require("herdr_nav")
 
 vim.cmd("source " .. vim.fn.stdpath("config") .. "/settings.vim")

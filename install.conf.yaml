@@ -17,6 +17,8 @@
         force: true
     ~/.tmux.conf: tmux.conf
     ~/.tmux: tmux
+    ~/.config/herdr/config.toml:
+        path: herdr.toml
     ~/.zshenv: zshenv
     ~/.zprofile: zprofile
     ~/.p10k.zsh: p10k.zsh
@@ -26,6 +28,7 @@
     ~/.antidote: antidote
     ~/.local/bin/op-ssh-sign: local/bin/op-ssh-sign
     ~/.local/bin/install-ai-tools: local/bin/install-ai-tools
+    ~/.local/bin/install-herdr-plugins: local/bin/install-herdr-plugins
     ~/.local/bin/ssh-agent-sock.sh: local/bin/ssh-agent-sock.sh
     ~/.local/bin/ssh-carrier: local/bin/ssh-carrier
 

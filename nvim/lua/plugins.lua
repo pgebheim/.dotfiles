@@ -1,6 +1,13 @@
 return {
   -- Navigation
-  "christoomey/vim-tmux-navigator",
+  {
+    "christoomey/vim-tmux-navigator",
+    init = function()
+      -- herdr_nav.lua (required in init.lua) provides the same <C-h/j/k/l>
+      -- maps and falls back to :TmuxNavigate* when outside herdr.
+      vim.g.tmux_navigator_no_mappings = 1
+    end,
+  },
   "scrooloose/nerdtree",
   "Xuyuanp/nerdtree-git-plugin",
 

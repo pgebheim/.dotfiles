@@ -1,0 +1,164 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+# Provision herdr plugin dependencies + plugins on a host.
+# Run this ON the target host (paste it in, or `ssh host 'bash -s' < install-herdr-plugins`)
+# after `herdr --remote <host>` has installed herdr there at least once.
+#
+# Plugins run wherever the herdr *server* runs — for a remote setup that's the
+# remote host, not your laptop — so its dependencies and plugin installs have
+# to happen there too. Keybindings (ctrl+h, prefix+f, ...) still come from your
+# local config.toml by default (--remote-keybindings local); only the plugin
+# implementations need to live here.
+
+RED='\033[0;31m'
+GREEN='\033[0;32m'
+YELLOW='\033[0;33m'
+NC='\033[0m' # No Color
+
+info()  { echo -e "${GREEN}[info]${NC} $*"; }
+warn()  { echo -e "${YELLOW}[warn]${NC} $*"; }
+error() { echo -e "${RED}[error]${NC} $*"; }
+
+command_exists() { command -v "$1" &>/dev/null; }
+
+require_herdr() {
+  if ! command_exists herdr; then
+    error "herdr not found on this host. Attach once with 'herdr --remote <this-host>' from your laptop first — it installs herdr for you."
+    exit 1
+  fi
+}
+
+# ---------- bun (sessionizer, collie) ----------
+install_bun() {
+  if command_exists bun; then
+    info "bun already installed: $(bun --version)"
+    return 0
+  fi
+
+  info "Installing bun..."
+  if [[ "$(uname)" == "Darwin" ]] && command_exists brew; then
+    brew install oven-sh/bun/bun
+  else
+    curl -fsSL https://bun.com/install | bash
+  fi
+  info "bun installed."
+}
+
+# ---------- fzf (sessionizer) ----------
+install_fzf() {
+  if command_exists fzf; then
+    info "fzf already installed: $(fzf --version)"
+    return 0
+  fi
+
+  info "Installing fzf..."
+  if [[ "$(uname)" == "Darwin" ]] && command_exists brew; then
+    brew install fzf
+  elif command_exists apt-get; then
+    sudo apt-get update && sudo apt-get install -y fzf
+  elif command_exists dnf; then
+    sudo dnf install -y fzf
+  elif command_exists pacman; then
+    sudo pacman -S --noconfirm fzf
+  else
+    error "No known package manager found for fzf. Install it manually: https://github.com/junegunn/fzf#installation"
+    return 1
+  fi
+  info "fzf installed."
+}
+
+# ---------- jq (vim-herdr-navigation, optional) ----------
+install_jq() {
+  if command_exists jq; then
+    info "jq already installed: $(jq --version)"
+    return 0
+  fi
+
+  info "Installing jq..."
+  if [[ "$(uname)" == "Darwin" ]] && command_exists brew; then
+    brew install jq
+  elif command_exists apt-get; then
+    sudo apt-get update && sudo apt-get install -y jq
+  elif command_exists dnf; then
+    sudo dnf install -y jq
+  elif command_exists pacman; then
+    sudo pacman -S --noconfirm jq
+  else
+    warn "No known package manager found for jq. vim-herdr-navigation still works without it, just without Vim-process detection."
+    return 0
+  fi
+  info "jq installed."
+}
+
+# ---------- herdr plugins ----------
+install_plugin() {
+  local repo="$1" id="$2"
+  if herdr plugin list 2>/dev/null | grep -q "^- ${id} "; then
+    info "herdr plugin '${id}' already installed."
+    return 0
+  fi
+  info "Installing herdr plugin ${repo}..."
+  herdr plugin install "$repo" --yes
+}
+
+install_sessionizer() {
+  install_bun && install_fzf && install_plugin andrewchng/herdr-sessionizer sessionizer || return 1
+
+  local config_file
+  config_file="$(herdr plugin config-dir sessionizer)/config.toml"
+  if [[ ! -f "$config_file" ]]; then
+    mkdir -p "$(dirname "$config_file")"
+    cat > "$config_file" <<-'EOF'
+	[projects]
+	# Parent folders searched by the interactive pickers
+	roots = ["~/dev"]
+	# true: only git repos; false: all immediate child folders
+	git_only = true
+	# Only used when git_only = true; 1 means immediate children
+	depth = 1
+	EOF
+    info "Seeded sessionizer config with roots = [\"~/dev\"] at ${config_file}"
+  fi
+}
+install_vim_herdr_navigation() { install_jq;    install_plugin paulbkim-dev/vim-herdr-navigation vim-herdr-navigation; }
+install_collie()               { install_bun && install_plugin AltanS/collie herdr.collie; }
+
+# ---------- Main ----------
+main() {
+  local plugins=("$@")
+  local failures=0
+
+  require_herdr
+
+  # Default: everything except collie — it starts a persistent tailnet-facing
+  # service (systemd/launchd + `tailscale serve`), so opt in explicitly with
+  # `install-herdr-plugins collie` (or `all`) once you've read its security docs.
+  if [[ ${#plugins[@]} -eq 0 ]]; then
+    plugins=(sessionizer vim-herdr-navigation)
+  elif [[ "${plugins[0]}" == "all" ]]; then
+    plugins=(sessionizer vim-herdr-navigation collie)
+  fi
+
+  for plugin in "${plugins[@]}"; do
+    case "$plugin" in
+      sessionizer)          install_sessionizer          || ((failures++)) ;;
+      vim-herdr-navigation) install_vim_herdr_navigation  || ((failures++)) ;;
+      collie)               install_collie                || ((failures++)) ;;
+      *)
+        error "Unknown plugin: $plugin (valid: sessionizer, vim-herdr-navigation, collie, all)"
+        ((failures++))
+        ;;
+    esac
+  done
+
+  echo ""
+  if [[ $failures -eq 0 ]]; then
+    info "All done. Reload with: herdr server reload-config"
+  else
+    warn "$failures plugin(s) failed to install."
+    return 1
+  fi
+}
+
+main "$@"
