@@ -19,6 +19,7 @@
     ~/.tmux: tmux
     ~/.config/herdr/config.toml:
         path: herdr.toml
+        force: true
     ~/.zshenv: zshenv
     ~/.zprofile: zprofile
     ~/.p10k.zsh: p10k.zsh
