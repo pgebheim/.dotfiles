@@ -9,6 +9,10 @@ prefix = "ctrl+a"
 split_vertical = "prefix+|"
 split_horizontal = "prefix+minus"
 
+# Direct (no prefix) — cycle agents by attention/order, not tied to pane focus.
+next_agent = "ctrl+shift+up"
+previous_agent = "ctrl+shift+down"
+
 [terminal]
 # tmux: both split bindings pass -c "#{pane_current_path}"
 new_cwd = "follow"
