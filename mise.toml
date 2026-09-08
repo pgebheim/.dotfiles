@@ -1,0 +1,29 @@
+# Dotfiles ownership — managed by `mise bootstrap dotfiles`.
+# Docs: https://mise.jdx.dev/dotfiles.html
+# This file is found by mise via MISE_CONFIG_FILE (set in zshenv), so the
+# repo is self-describing on a fresh machine: no pre-existing symlink needed.
+#
+# Migrated from dotbot's install.conf.yaml (stage 1; dotbot still owns the
+# shell blocks: git submodules, nvim plugin sync, macOS LaunchAgents,
+# Omarchy .local copies). Default mode is symlink; explicit where it matters.
+[dotfiles]
+"~/.profile" = "profile"
+"~/.bash_profile" = "bash_profile"
+"~/.bashrc" = "bashrc"
+"~/.bash_logout" = "bash_logout"
+"~/.gitconfig" = "gitconfig"
+"~/.gitshrc" = "gitshrc"
+"~/.ssh/config" = { source = "ssh/config" }
+"~/.config/nvim" = { source = "nvim" }
+"~/.tmux.conf" = "tmux.conf"
+"~/.config/tmux/tmux.conf" = { source = "tmux.conf" }
+"~/.tmux" = "tmux"
+"~/.config/herdr/config.toml" = { source = "herdr.toml" }
+"~/.zshenv" = "zshenv"
+"~/.zprofile" = "zprofile"
+"~/.p10k.zsh" = "p10k.zsh"
+"~/.zshrc" = "zshrc"
+"~/.zsh_plugins.txt" = "zsh_plugins.txt"
+"~/.antidote" = { source = "antidote" }
+# Every script in the repo dir gets linked; new scripts propagate on apply.
+"~/.local/bin" = { source = "local/bin", mode = "symlink-each" }

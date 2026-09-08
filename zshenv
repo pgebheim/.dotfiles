@@ -17,6 +17,11 @@ export PATH="$GO_HOME/bin:$BUN_INSTALL/bin:$HOME/.local/bin:$HOME/.cargo/bin:$PA
 # Rust toolchain env (sets PATH defensively if cargo is installed)
 [ -r "$HOME/.cargo/env" ] && . "$HOME/.cargo/env"
 
+# mise reads its config — including the [dotfiles] table in this repo — via
+# MISE_CONFIG_FILE, so a fresh machine needs no pre-existing symlink for
+# `mise bootstrap dotfiles apply` to work.
+export MISE_CONFIG_FILE="$HOME/.dotfiles/mise.toml"
+
 # Color man pages with bat when available (Omarchy-style)
 if command -v bat &>/dev/null; then
     export MANROFFOPT="-c"
