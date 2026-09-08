@@ -48,3 +48,13 @@
         done
       fi
     description: Link macOS LaunchAgents
+  - command: |
+      if [ -d "${OMARCHY_PATH:-/usr/share/omarchy}" ]; then
+        # Copy (not symlink): the live ~/.local files stay a genuine
+        # per-machine layer that can be hand-tweaked without dirtying git.
+        # Re-running ./install refreshes them from these tracked copies.
+        cp "$PWD"/local/omarchy/tmux.conf.local ~/.tmux.conf.local
+        cp "$PWD"/local/omarchy/zshrc.local ~/.zshrc.local
+        echo "Installed Omarchy theme .local overrides"
+      fi
+    description: Install Omarchy per-machine theme overrides

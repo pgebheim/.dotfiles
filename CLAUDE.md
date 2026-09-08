@@ -48,7 +48,7 @@ Shared configs deliberately end with an untracked, per-machine override hook —
 | `~/.tmux.conf.local` | end of `tmux.conf`, after tpm (`source-file -q`, overrides themepack) |
 | `~/.gitconfig.signing` | `gitconfig` `[include]` (commit signing opt-in) |
 
-These files are NOT tracked and NOT installed by dotbot. On Omarchy machines they carry the theme integration (named ANSI colors that follow the Omarchy terminal palette); other machines simply don't have them.
+These live files are untracked per-machine layers (never commit them). On Omarchy machines, `./install` refreshes them from the tracked, secret-free templates in `local/omarchy/` (copied, not symlinked, so hand-tweaks on a machine don't dirty git — re-running `./install` restores the tracked version). Non-Omarchy machines never get the files and the hooks silently no-op.
 
 ## Working with these files
 
