@@ -17,6 +17,12 @@ export PATH="$GO_HOME/bin:$BUN_INSTALL/bin:$HOME/.local/bin:$HOME/.cargo/bin:$PA
 # Rust toolchain env (sets PATH defensively if cargo is installed)
 [ -r "$HOME/.cargo/env" ] && . "$HOME/.cargo/env"
 
+# Color man pages with bat when available (Omarchy-style)
+if command -v bat &>/dev/null; then
+    export MANROFFOPT="-c"
+    export MANPAGER="sh -c 'col -bx | bat -l man -p'"
+fi
+
 # fzf defaults
 export FZF_DEFAULT_COMMAND='ag --hidden --ignore .git --ignore node_modules -g ""'
 export FZF_DEFAULT_OPTS='

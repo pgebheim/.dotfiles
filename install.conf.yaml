@@ -25,7 +25,6 @@
     ~/.p10k.zsh: p10k.zsh
     ~/.zshrc: zshrc
     ~/.zsh_plugins.txt: zsh_plugins.txt
-    ~/.vim: nvim
     ~/.antidote: antidote
     ~/.local/bin/op-ssh-sign: local/bin/op-ssh-sign
     ~/.local/bin/install-ai-tools: local/bin/install-ai-tools

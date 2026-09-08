@@ -21,12 +21,35 @@ source ${zsh_plugins}.zsh
 autoload -Uz compinit
 compinit
 
+# Completion feel — ported from Omarchy's bash inputrc
+zmodload zsh/complist
+# Tab completes the common prefix, then opens a selectable list
+# (arrows/Tab cycle, Shift-Tab reverses)
+zstyle ':completion:*' menu select
+# Case-insensitive matching
+zstyle ':completion:*' matcher-list 'm:{a-zA-Z}={A-Za-z}'
+# Colored file listings in completions (like readline's colored-stats)
+zstyle ':completion:*' list-colors ${(s.:.)LS_COLORS}
+# ls -F-style suffixes in listings (*/@ markers, like visible-stats)
+setopt list_types
+# Ask before listing only when there are more than 200 matches
+LISTMAX=200
+
 # Aliases
-if [[ "$(uname)" == "Darwin" ]]; then
+# eza with icons when available (Omarchy-style listing); plain ls fallback
+if command -v eza &>/dev/null; then
+  alias ls='eza -lh --group-directories-first --icons=auto'
+  alias lsa='ls -a'
+  alias lt='eza --tree --level=2 --long --icons --git'
+  alias lta='lt -a'
+elif [[ "$(uname)" == "Darwin" ]]; then
   alias ls='ls -FGa'
 else
   alias ls='ls -Fa --color=auto'
 fi
+alias ..='cd ..'
+alias ...='cd ../..'
+alias ....='cd ../../..'
 alias e='$EDITOR'
 alias g='git'
 alias ccat='~/.local/bin/pygmentize -g'
@@ -34,6 +57,13 @@ alias vim=nvim
 alias yaml2js="python -c 'import sys, yaml, json; json.dump(yaml.load(sys.stdin), sys.stdout, indent=4)'"
 alias dh="dirs -v" # nicer list for directory history
 alias md="glow -p"
+# fzf file picker with preview (bat, or kitty image previews in kitty)
+if [[ "$TERM" == "xterm-kitty" ]] && command -v bat &>/dev/null; then
+  alias ff="fzf --preview 'case \$(file --mime-type -b {}) in image/*) kitty icat --clear --transfer-mode=memory --stdin=no --place=\${FZF_PREVIEW_COLUMNS}x\${FZF_PREVIEW_LINES}@0x0 {} ;; *) bat --style=numbers --color=always {} ;; esac'"
+elif command -v bat &>/dev/null; then
+  alias ff='fzf --preview "bat --style=numbers --color=always {}"'
+fi
+n() { if [ "$#" -eq 0 ]; then command nvim .; else command nvim "$@"; fi; }
 
 # Functions
 fe() { vim -c ":FZF" }

@@ -21,8 +21,22 @@
 [diff]
 	mnemonicprefix = true
 	tool = vimdiff
+	algorithm = histogram    # Clearer diffs on moved/edited lines
+	colorMoved = plain       # Highlight moved blocks in diffs
 [push]
 	default = current
+	autoSetupRemote = true   # Automatically set upstream branch on push
+[pull]
+	rebase = true            # Rebase (instead of merge) on pull
+[commit]
+	gpgsign = false
+	verbose = true           # Include diff comment in commit message template
+[column]
+	ui = auto                # Output in columns when possible
+[branch]
+	sort = -committerdate    # Sort branches by most recent commit first
+[tag]
+	sort = -version:refname  # Sort version numbers as you would expect
 [color]
 	branch = auto
 	diff = auto
@@ -65,6 +79,7 @@
 	clean = git-lfs clean -- %f
 [rerere]
 	enabled = true
+	autoupdate = true        # Apply stored conflict resolutions automatically
 [commit]
 	gpgsign = false
 [init]

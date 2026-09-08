@@ -13,9 +13,9 @@ Paul's personal dotfiles, managed with [dotbot](https://github.com/anishathalye/
 | File/Dir | Purpose |
 |---|---|
 | `nvim/` | Neovim config directory — symlinked to `~/.config/nvim` |
-| `nvim/init.lua` | Neovim entry point (sources `init.vim` for now) |
-| `nvim/init.vim` | Cleaned VimScript config (active neovim config) |
-| `nvim/lua/` | Future Lua modules (options, keymaps, plugins) |
+| `nvim/init.lua` | Neovim entry point (LazyVim bootstrap + herdr nav) |
+| `nvim/lua/config/` | LazyVim config: options, keymaps, autocmds, lazy bootstrap |
+| `nvim/lua/plugins/` | Plugin specs. `theme.lua` delegates to Omarchy's generated theme; `fallback-theme.lua` (nightfly) applies on machines without Omarchy |
 | `vimrc` | Legacy vim config — symlinked to `~/.vimrc` (may become stale) |
 | `vim/` | Vim runtime files (colors, autoload, spell) — symlinked to `~/.vim` and neovim site |
 | `zshrc` | Zsh config (antidote plugin manager, p10k prompt) |
@@ -39,8 +39,7 @@ Paul's personal dotfiles, managed with [dotbot](https://github.com/anishathalye/
 
 ## Working with these files
 
-- **Neovim config lives in `nvim/`** — edit `nvim/init.vim` for VimScript changes. The Lua entry point (`nvim/init.lua`) sources it automatically.
-- Future Lua migration: move chunks from `nvim/init.vim` into `nvim/lua/*.lua` files and `require()` them from `init.lua`.
+- **Neovim config lives in `nvim/`** and is LazyVim-based (adopted from Omarchy's `omarchy-nvim` defaults, which live-edit `~/.config/nvim` on theme switches — keep that file layout). Personal plugins/keymaps are in `lua/plugins/personal.lua` and `lua/config/keymaps.lua`.
 - After editing neovim config, `:source %` or restart nvim.
 - After editing `tmux.conf`, reload with `tmux source ~/.tmux.conf` or `prefix + I` for plugins.
 - After editing `zshrc`, reload with `source ~/.zshrc` or open a new shell.
