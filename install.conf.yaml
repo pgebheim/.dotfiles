@@ -16,6 +16,11 @@
         path: nvim
         force: true
     ~/.tmux.conf: tmux.conf
+    # tmux ≥3.1 checks the XDG path BEFORE ~/.tmux.conf; Omarchy ships a
+    # config there, so claim it too or Omarchy's would keep winning.
+    ~/.config/tmux/tmux.conf:
+        path: tmux.conf
+        force: true
     ~/.tmux: tmux
     ~/.config/herdr/config.toml:
         path: herdr.toml
