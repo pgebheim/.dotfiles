@@ -37,6 +37,19 @@ Paul's personal dotfiles, managed with [dotbot](https://github.com/anishathalye/
 - **Fuzzy finder**: fzf (with rg/ag backends)
 - **Tmux prefix**: `C-a` (not the default `C-b`)
 
+## Per-machine overrides (`.local` chain)
+
+Shared configs deliberately end with an untracked, per-machine override hook — use it for machine-specific theming (e.g. Omarchy integration) so the dotfiles themselves never drift:
+
+| Hook | Loaded by |
+|---|---|
+| `~/.zshrc.local` | end of `zshrc` (p10k recolors, aliases) |
+| `~/.zshenv.local` | end of `zshenv` |
+| `~/.tmux.conf.local` | end of `tmux.conf`, after tpm (`source-file -q`, overrides themepack) |
+| `~/.gitconfig.signing` | `gitconfig` `[include]` (commit signing opt-in) |
+
+These files are NOT tracked and NOT installed by dotbot. On Omarchy machines they carry the theme integration (named ANSI colors that follow the Omarchy terminal palette); other machines simply don't have them.
+
 ## Working with these files
 
 - **Neovim config lives in `nvim/`** and is LazyVim-based (adopted from Omarchy's `omarchy-nvim` defaults, which live-edit `~/.config/nvim` on theme switches — keep that file layout). Personal plugins/keymaps are in `lua/plugins/personal.lua` and `lua/config/keymaps.lua`.
