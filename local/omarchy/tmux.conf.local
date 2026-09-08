@@ -6,8 +6,9 @@
 # re-tints the terminal, pushes OSC sequences into panes, and syncs window
 # styles at runtime — nothing more is needed here.
 
-# Status bar (mirrors Omarchy's own tmux.conf theme block)
-set -g status-position top
+# Status bar (mirrors Omarchy's own tmux.conf theme block, but at the
+# bottom — the long-standing position in this config; Omarchy puts it on top)
+set -g status-position bottom
 set -g status-interval 5
 set -g status-left-length 30
 set -g status-right-length 50
