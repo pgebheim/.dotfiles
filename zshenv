@@ -10,9 +10,12 @@ export pager='less -FRX'
 
 # PATH
 export GO_HOME="$HOME/go"
-export BUN_INSTALL="$HOME/.bun"
-export NVM_DIR="$HOME/.nvm"
-export PATH="$GO_HOME/bin:$BUN_INSTALL/bin:$HOME/.local/bin:$HOME/.cargo/bin:$PATH"
+export PATH="$GO_HOME/bin:$HOME/.local/bin:$HOME/.cargo/bin:$PATH"
+
+# mise shims (managed tools: node, bun, pnpm, pi, codex). Static entry —
+# populated by `mise install`, no eval cost. Precedes /usr/bin so managed
+# tools win over pacman/brew copies on every host.
+export PATH="$HOME/.local/share/mise/shims:$PATH"
 
 # Rust toolchain env (sets PATH defensively if cargo is installed)
 [ -r "$HOME/.cargo/env" ] && . "$HOME/.cargo/env"

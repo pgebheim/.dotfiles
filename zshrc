@@ -89,8 +89,6 @@ export HISTFILESIZE=1000000
 export HISTFILE=~/.zsh_history
 
 # Tool integrations
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
-[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"
 [ -s "$HOME/.bun/_bun" ] && source "$HOME/.bun/_bun"
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 [ -f ~/.config/linear/config.zsh ] && source ~/.config/linear/config.zsh

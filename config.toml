@@ -8,6 +8,11 @@
 codex = "latest"
 node = "26.8.1"
 pi = "latest"
+# JS toolchain, unified across hosts (claw had node/npm/bun from pacman,
+# pnpm nowhere; this box had only node). bun pinned to what claw already
+# runs; pnpm is new capability. `mise install` on each host.
+bun = "1.4.0"
+"npm:pnpm" = "latest"
 
 # Dotfiles ownership — managed by `mise bootstrap dotfiles`.
 # Docs: https://mise.jdx.dev/dotfiles.html
