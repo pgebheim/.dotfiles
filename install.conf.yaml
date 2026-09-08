@@ -1,41 +1,8 @@
-- defaults:
-    link:
-      create: true   # create parent directories as needed
-      relink: true   # optional, helps if links already exist
-
-- link:
-    ~/.profile: profile
-    ~/.bash_profile: bash_profile
-    ~/.bashrc: bashrc
-    ~/.bash_logout: bash_logout
-    ~/.gitconfig: gitconfig
-    ~/.gitshrc: gitshrc
-    ~/.ssh/config:
-        path: ssh/config
-    ~/.config/nvim:
-        path: nvim
-        force: true
-    ~/.tmux.conf: tmux.conf
-    # tmux ≥3.1 checks the XDG path BEFORE ~/.tmux.conf; Omarchy ships a
-    # config there, so claim it too or Omarchy's would keep winning.
-    ~/.config/tmux/tmux.conf:
-        path: tmux.conf
-        force: true
-    ~/.tmux: tmux
-    ~/.config/herdr/config.toml:
-        path: herdr.toml
-        force: true
-    ~/.zshenv: zshenv
-    ~/.zprofile: zprofile
-    ~/.p10k.zsh: p10k.zsh
-    ~/.zshrc: zshrc
-    ~/.zsh_plugins.txt: zsh_plugins.txt
-    ~/.antidote: antidote
-    ~/.local/bin/op-ssh-sign: local/bin/op-ssh-sign
-    ~/.local/bin/install-ai-tools: local/bin/install-ai-tools
-    ~/.local/bin/install-herdr-plugins: local/bin/install-herdr-plugins
-    ~/.local/bin/ssh-agent-sock.sh: local/bin/ssh-agent-sock.sh
-    ~/.local/bin/ssh-carrier: local/bin/ssh-carrier
+# dotbot's remaining job after the mise migration: machine-setup hooks that
+# are NOT dotfile ownership. All dotfile links are owned by the tracked
+# [dotfiles] table in config.toml, applied by `mise bootstrap dotfiles apply`.
+# (The Omarchy .local copies moved to the mise `omarchy` config environment:
+# config.omarchy.toml, selected by the MISE_ENV path guard in zshenv.)
 
 - shell:
   - [git submodule update --init --recursive, Installing submodules]
@@ -48,13 +15,3 @@
         done
       fi
     description: Link macOS LaunchAgents
-  - command: |
-      if [ -d "${OMARCHY_PATH:-/usr/share/omarchy}" ]; then
-        # Copy (not symlink): the live ~/.local files stay a genuine
-        # per-machine layer that can be hand-tweaked without dirtying git.
-        # Re-running ./install refreshes them from these tracked copies.
-        cp "$PWD"/local/omarchy/tmux.conf.local ~/.tmux.conf.local
-        cp "$PWD"/local/omarchy/zshrc.local ~/.zshrc.local
-        echo "Installed Omarchy theme .local overrides"
-      fi
-    description: Install Omarchy per-machine theme overrides
