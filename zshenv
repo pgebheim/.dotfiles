@@ -17,8 +17,12 @@ export PATH="$GO_HOME/bin:$BUN_INSTALL/bin:$HOME/.local/bin:$HOME/.cargo/bin:$PA
 # Rust toolchain env (sets PATH defensively if cargo is installed)
 [ -r "$HOME/.cargo/env" ] && . "$HOME/.cargo/env"
 
+# mise: the dotfiles repo doubles as the global mise config dir (tracked
+# config.toml = tool pins + dotfiles table), so no symlinks are needed and
+# relative dotfile sources resolve against the repo root.
+export MISE_CONFIG_DIR="$HOME/.dotfiles"
 # mise: Omarchy machines opt into the `omarchy` config layer
-# (mise.omarchy.toml: Omarchy-only dotfiles). Path-guarded so other machines
+# (config.omarchy.toml: Omarchy-only dotfiles). Path-guarded so other machines
 # silently use the base config only.
 [ -d /usr/share/omarchy ] && export MISE_ENV=omarchy
 

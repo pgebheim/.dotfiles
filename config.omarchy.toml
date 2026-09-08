@@ -1,4 +1,4 @@
-# Omarchy-only dotfiles — layered on top of mise.toml when the `omarchy`
+# Omarchy-only dotfiles — layered on top of config.toml when the `omarchy`
 # config environment is selected (`mise -E omarchy ...` or MISE_ENV=omarchy).
 # Machines select it via a path guard in zshenv/bashrc ([[ -d /usr/share/omarchy ]]),
 # keeping the repo self-describing. Copy mode, not symlink: the live ~/.local

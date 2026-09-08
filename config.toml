@@ -1,4 +1,9 @@
-# Machine tools, pinned in one place (was ~/.config/mise/config.toml).
+# mise finds this file via MISE_CONFIG_DIR=$HOME/.dotfiles (exported from
+# zshenv/bashrc): the repo root IS the global mise config dir, so relative
+# dotfile sources resolve here and no symlinks are needed on any machine.
+# The omarchy layer lives in config.omarchy.toml beside it, selected by
+# MISE_ENV (path guard in zshenv/bashrc). `mise use -g` writes tool pins
+# straight into this file (in git).
 [tools]
 codex = "latest"
 node = "26.8.1"
@@ -6,9 +11,6 @@ pi = "latest"
 
 # Dotfiles ownership — managed by `mise bootstrap dotfiles`.
 # Docs: https://mise.jdx.dev/dotfiles.html
-# This file is found by mise as ~/.config/mise/config.toml (symlink installed
-# by the bootstrap); the omarchy layer lives in mise.omarchy.toml next to it
-# and is selected by MISE_ENV (set from a path guard in zshenv/bashrc).
 #
 # Migrated from dotbot's install.conf.yaml (stage 1; dotbot still owns the
 # shell blocks: git submodules, nvim plugin sync, macOS LaunchAgents,
