@@ -1,0 +1,8 @@
+# Omarchy-only dotfiles — layered on top of mise.toml when the `omarchy`
+# config environment is selected (`mise -E omarchy ...` or MISE_ENV=omarchy).
+# Machines select it via a path guard in zshenv/bashrc ([[ -d /usr/share/omarchy ]]),
+# keeping the repo self-describing. Copy mode, not symlink: the live ~/.local
+# files stay a genuine per-machine layer; re-applying refreshes them from here.
+[dotfiles]
+"~/.tmux.conf.local" = { source = "local/omarchy/tmux.conf.local", mode = "copy" }
+"~/.zshrc.local" = { source = "local/omarchy/zshrc.local", mode = "copy" }

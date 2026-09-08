@@ -1,6 +1,8 @@
 # Omarchy environment (OMARCHY_PATH + PATH), needed even for non-login
 # shells. Guarded by the path so other machines skip it silently.
 [[ -r /usr/share/omarchy/default/bash/env-bootstrap ]] && source /usr/share/omarchy/default/bash/env-bootstrap
+# Same path guard as zshenv: opt mise into the omarchy config layer.
+[[ -d /usr/share/omarchy ]] && export MISE_ENV=omarchy
 
 # ~/.bashrc: executed by bash(1) for non-login shells.
 # see /usr/share/doc/bash/examples/startup-files (in the package bash-doc)

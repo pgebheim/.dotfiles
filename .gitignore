@@ -1,4 +1,3 @@
-# Legacy vim-plug checkouts + nvim-generated caches (undo history, tree-sitter
-# parser binaries/queries). ~/.vim now symlinks to nvim/, not here; nothing
-# under vim/ has ever been tracked in git.
-vim/
+# mise local-override files (per-machine, never committed)
+mise.local.toml
+mise.*.local.toml
