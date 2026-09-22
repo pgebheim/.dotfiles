@@ -2,6 +2,12 @@
 
 Paul's personal dotfiles, managed with [dotbot](https://github.com/anishathalye/dotbot).
 
+> **In transition (2026-09):** dotfiles and machine tools are migrating to
+> [mise](https://mise.jdx.dev/) — see **`MISE.md`** for the current model,
+> commands, new-machine bootstrap, and gotchas. `install.conf.yaml` now only
+> holds setup hooks; dotfile ownership lives in the tracked `[dotfiles]`
+> table in `config.toml`.
+
 ## Setup
 
 - **Install**: `./install` — runs dotbot to symlink everything into `~`
