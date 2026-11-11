@@ -94,6 +94,11 @@ if [ -f ~/.fzf.zsh ]; then source ~/.fzf.zsh; fi
 if [ -f ~/.config/linear/config.zsh ]; then source ~/.config/linear/config.zsh; fi
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
+# Shared platform defaults, after p10k but before machine-local overrides.
+if [[ -d /usr/share/omarchy && -f ~/.config/dotfiles/omarchy/zshrc ]]; then
+  source ~/.config/dotfiles/omarchy/zshrc
+fi
+
 # Per-host overrides (untracked). Sourced last so it can override anything above.
 if [ -f ~/.zshrc.local ]; then source ~/.zshrc.local; fi
 

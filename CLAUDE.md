@@ -49,12 +49,17 @@ Shared configs deliberately end with an untracked, per-machine override hook —
 
 | Hook | Loaded by |
 |---|---|
-| `~/.zshrc.local` | end of `zshrc` (p10k recolors, aliases) |
+| `~/.zshrc.local` | end of `zshrc`, after shared Omarchy defaults |
 | `~/.zshenv.local` | end of `zshenv` |
 | `~/.tmux.conf.local` | end of `tmux.conf`, after tpm (`source-file -q`, overrides themepack) |
 | `~/.gitconfig.signing` | `gitconfig` `[include]` (commit signing opt-in) |
 
-These live files are untracked per-machine layers (never commit them). On Omarchy machines, `./install` refreshes them from the tracked, secret-free templates in `local/omarchy/` (copied, not symlinked, so hand-tweaks on a machine don't dirty git — re-running `./install` restores the tracked version). Non-Omarchy machines never get the files and the hooks silently no-op.
+These live files are untracked per-machine layers (never commit or manage them
+with mise). Shared Omarchy defaults live in tracked `omarchy/`, symlinked to
+`~/.config/dotfiles/omarchy` by `config.omarchy.toml`. On Omarchy, `zshrc` and
+`tmux.conf` load these defaults after p10k/plugins but before the `.local` hooks,
+so machine overrides always win. `zshenv.local` remains an unmanaged hook; there
+is no shared Omarchy zshenv file. See `MISE.md` for migrating old `.local` copies.
 
 ## Working with these files
 

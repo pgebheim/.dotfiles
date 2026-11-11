@@ -18,10 +18,11 @@ set, same flow on every host.
   symlinks into `~/.config/mise` — those broke source resolution (see Gotchas).
 - `MISE_ENV=omarchy` is set by a path guard in `zshenv`/`bashrc`
   (`[[ -d /usr/share/omarchy ]]`), so machines self-select their profile.
-- Dotfiles modes: `symlink` (default — edits through `~` land in git),
-  `symlink-each` (`~/.local/bin`), `copy` (the omarchy `.local` files — the
-  live file stays a real, hand-tweakable per-machine file; re-apply refreshes
-  it from the repo).
+- Dotfiles modes: `symlink` (default — edits through `~` land in git) and
+  `symlink-each` (`~/.local/bin`). Shared Omarchy defaults in `omarchy/` are
+  linked at `~/.config/dotfiles/omarchy` and loaded before machine-local hooks.
+- `~/.zshrc.local`, `~/.zshenv.local`, and `~/.tmux.conf.local` are unmanaged,
+  untracked machine overrides. Applying dotfiles never refreshes these files.
 
 ## Daily use
 
@@ -35,9 +36,6 @@ mise upgrade                         # bump everything pinned "latest"
 mise bootstrap dotfiles status       # applied / differs / missing
 mise bootstrap dotfiles diff         # what would change
 mise bootstrap dotfiles apply        # push it live
-
-# copy-mode round trip (the ~/.local files):
-mise bootstrap dotfiles add ~/.zshrc.local   # save live tweaks back to repo
 ```
 
 Every command works from any directory; `MISE_CONFIG_DIR` comes from `zshenv`.
@@ -92,8 +90,11 @@ between profiles.
   `~/.config/mise/config.toml`. If you find that file, it's a stray — delete
   it (or move the pin into the tracked config). Permanent fix (system-wide
   env) is pending Stage 4.
-- **`apply` overwrites live edits** in copy mode — use `add` to save them back
-  first. Symlink-mode files have no such issue (edits ARE repo edits).
+- **Migrating old Omarchy `.local` copies:** after applying the new mapping,
+  back up `~/.zshrc.local` and `~/.tmux.conf.local`, then remove the old template
+  content from them (now in `omarchy/`). Keep any actual machine-specific
+  additions. Otherwise the old defaults will still override the shared layer.
+  `~/.zshenv.local` was never template-managed and needs no migration.
 - **tmux servers cache config.** After changing tmux/zsh/p10k files, restart
   tmux or `source-file ~/.config/tmux/tmux.conf`; old servers keep old options.
 - **`latest` pins drift per host** (codex, pnpm) until `mise.lock` lands —

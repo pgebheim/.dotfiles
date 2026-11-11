@@ -5,21 +5,20 @@
 # MISE_ENV (path guard in zshenv/bashrc). `mise use -g` writes tool pins
 # straight into this file (in git).
 [tools]
-codex = "latest"
-node = "26.8.1"
-pi = "latest"
+node = "26.9.0"
 # JS toolchain, unified across hosts (claw had node/npm/bun from pacman,
 # pnpm nowhere; this box had only node). bun pinned to what claw already
 # runs; pnpm is new capability. `mise install` on each host.
-bun = "1.4.0"
+bun = "1.4.2"
 pnpm = "latest"
+java = "25"
 
 # Dotfiles ownership — managed by `mise bootstrap dotfiles`.
 # Docs: https://mise.jdx.dev/dotfiles.html
 #
 # Migrated from dotbot's install.conf.yaml (stage 1; dotbot still owns the
-# shell blocks: git submodules, nvim plugin sync, macOS LaunchAgents,
-# Omarchy .local copies). Default mode is symlink; explicit where it matters.
+# shell blocks: git submodules, nvim plugin sync, macOS LaunchAgents).
+# Default mode is symlink; explicit where it matters.
 [dotfiles]
 "~/.profile" = "profile"
 "~/.bash_profile" = "bash_profile"
@@ -41,3 +40,5 @@ pnpm = "latest"
 "~/.antidote" = { source = "antidote" }
 # Every script in the repo dir gets linked; new scripts propagate on apply.
 "~/.local/bin" = { source = "local/bin", mode = "symlink-each" }
+
+[settings.upgrade]

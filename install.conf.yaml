@@ -1,8 +1,8 @@
 # dotbot's remaining job after the mise migration: machine-setup hooks that
 # are NOT dotfile ownership. All dotfile links are owned by the tracked
 # [dotfiles] table in config.toml, applied by `mise bootstrap dotfiles apply`.
-# (The Omarchy .local copies moved to the mise `omarchy` config environment:
-# config.omarchy.toml, selected by the MISE_ENV path guard in zshenv.)
+# Shared Omarchy defaults live in omarchy/, linked by config.omarchy.toml.
+# Machine-local override files are not managed by either installer.
 
 - shell:
   - [git submodule update --init --recursive, Installing submodules]

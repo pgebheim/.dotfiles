@@ -1,5 +1,5 @@
-# Omarchy theme integration — per-machine override (untracked).
-# Sourced last from ~/.zshrc, after p10k's config, so these win.
+# Shared Omarchy theme integration (tracked).
+# Sourced from ~/.zshrc after p10k, before unmanaged ~/.zshrc.local.
 #
 # Omarchy themes the terminal palette itself; p10k named ANSI colors follow
 # it on every `omarchy theme set`. Numbered/hex colors in p10k.zsh stay as
