@@ -47,6 +47,6 @@ export FZF_DEFAULT_OPTS='
 export RTK_TELEMETRY_DISABLED=1
 
 # Persist forwarded SSH agent socket so mosh/tmux reattaches can reuse it.
-[ -f ~/.local/bin/ssh-agent-sock.sh ] && source ~/.local/bin/ssh-agent-sock.sh
+if [ -f ~/.local/bin/ssh-agent-sock.sh ]; then source ~/.local/bin/ssh-agent-sock.sh; fi
 
-[ -f ~/.zshenv.local ] && source ~/.zshenv.local
+if [ -f ~/.zshenv.local ]; then source ~/.zshenv.local; fi

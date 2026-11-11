@@ -1,3 +1,4 @@
+onboarding = false
 # herdr configuration — ported from tmux.conf to keep muscle memory intact.
 # https://herdr.dev/docs/configuration/
 # Docs: `herdr --default-config` prints every key with its default, commented out.
@@ -18,6 +19,7 @@ panel_bg = "black"
 prefix = "ctrl+a"
 
 # tmux: `bind | split-window -h` (side-by-side) / `bind - split-window -v` (stacked)
+new_tab = "prefix+shift+c"
 split_vertical = "prefix+|"
 split_horizontal = "prefix+minus"
 
@@ -62,6 +64,7 @@ window_title = "{hostname}: {workspace}"
 
 # vim-herdr-navigation: Ctrl+h/j/k/l crosses between herdr panes and
 # Neovim splits as one grid (vim-tmux-navigator, ported).
+agent_panel_sort = "spaces"
 [[keys.command]]
 key = "ctrl+h"
 type = "plugin_action"
@@ -98,3 +101,38 @@ key = "prefix+up"
 type = "plugin_action"
 command = "sessionizer.worktree-open"
 description = "open worktree workspace"
+
+# herdr-mirror -- requires this is installed
+
+[[keys.command]]
+key = "prefix+c"                   # was native new_tab
+type = "plugin_action"
+command = "mirror.remote-new-tab"
+
+[[keys.command]]
+key = "prefix+|"                   # was native split_vertical
+type = "plugin_action"
+command = "mirror.remote-split-right"
+
+[[keys.command]]
+key = "prefix+minus"               # was native split_horizontal
+type = "plugin_action"
+command = "mirror.remote-split-down"
+
+[[keys.command]]
+key = "prefix+shift+a"
+type = "plugin_action"
+command = "~/dev/herdr-mirror/target/release/herdr-mirror remote-invoke lilexe.agent"
+description = "run agent in lilbox"
+
+[[keys.command]]
+key = "prefix+shift+m"
+type = "plugin_action"
+command = "~/dev/herdr-mirror/target/release/herdr-mirror remote-invoke lilexe.manage"
+description = "manage lilbox sandboxes"
+
+[[keys.command]]
+key = "prefix+p"
+type = "plugin_action"
+command = "jt.command-palette.open"
+description = "Command palette"

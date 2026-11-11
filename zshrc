@@ -90,9 +90,10 @@ export HISTFILE=~/.zsh_history
 
 # Tool integrations
 [ -s "$HOME/.bun/_bun" ] && source "$HOME/.bun/_bun"
-[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
-[ -f ~/.config/linear/config.zsh ] && source ~/.config/linear/config.zsh
+if [ -f ~/.fzf.zsh ]; then source ~/.fzf.zsh; fi
+if [ -f ~/.config/linear/config.zsh ]; then source ~/.config/linear/config.zsh; fi
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
 # Per-host overrides (untracked). Sourced last so it can override anything above.
-[ -f ~/.zshrc.local ] && source ~/.zshrc.local
+if [ -f ~/.zshrc.local ]; then source ~/.zshrc.local; fi
+
