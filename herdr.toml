@@ -1,4 +1,3 @@
-onboarding = false
 # herdr configuration — ported from tmux.conf to keep muscle memory intact.
 # https://herdr.dev/docs/configuration/
 # Docs: `herdr --default-config` prints every key with its default, commented out.

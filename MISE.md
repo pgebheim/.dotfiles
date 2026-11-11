@@ -72,7 +72,8 @@ Back up any pre-existing real dotfiles first (we keep ours in
 |---|---|---|
 | this box (Omarchy arch) | flipped: mise owns tools + dotfiles | `omarchy` layer active |
 | claw (plain arch) | flipped | base |
-| nami (macOS), ohara, zoro | old dotbot flow, converge with the playbook above | base |
+| zoro (plain arch) | mise owns dotfiles; tool migration pending (NVM/pnpm retained) | base |
+| nami (macOS), ohara | old dotbot flow, converge with the playbook above | base |
 
 To add a profile (e.g. `work`): create `config.work.toml` in the repo, then set
 `MISE_ENV=work` for those machines (path guard in zshenv, or untracked
