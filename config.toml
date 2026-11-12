@@ -12,6 +12,7 @@ node = "26.9.0"
 bun = "1.4.2"
 pnpm = "latest"
 java = "25"
+eza = "latest"
 
 # Dotfiles ownership — managed by `mise bootstrap dotfiles`.
 # Docs: https://mise.jdx.dev/dotfiles.html
