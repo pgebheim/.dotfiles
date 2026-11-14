@@ -13,6 +13,8 @@ bun = "1.4.2"
 pnpm = "latest"
 java = "25"
 eza = "latest"
+# Rust toolchain includes cargo, rustc, rustfmt, and clippy.
+rust = "stable"
 
 # Dotfiles ownership — managed by `mise bootstrap dotfiles`.
 # Docs: https://mise.jdx.dev/dotfiles.html
