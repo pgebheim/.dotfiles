@@ -1,3 +1,5 @@
 # mise local-override files (per-machine, never committed)
 mise.local.toml
 mise.*.local.toml
+
+nvim/lazy-lock.json
