@@ -26,7 +26,7 @@ vim.api.nvim_create_autocmd("FileType", {
 	group = augroup,
 	pattern = "gitcommit",
 	callback = function()
-		vim.bo.spell = true
+		vim.wo.spell = true
 		vim.bo.textwidth = 72
 	end,
 })
@@ -35,7 +35,7 @@ vim.api.nvim_create_autocmd("FileType", {
 	group = augroup,
 	pattern = "markdown",
 	callback = function()
-		vim.bo.spell = true
+		vim.wo.spell = true
 		vim.bo.textwidth = 120
 		vim.wo.wrap = true
 		vim.wo.linebreak = true
