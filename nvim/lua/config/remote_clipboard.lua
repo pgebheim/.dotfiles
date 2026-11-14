@@ -2,8 +2,9 @@
 -- every copy is emitted as OSC 52 (inside tmux this becomes a tmux buffer,
 -- rebroadcast to every attached client, local or SSH). Paste prefers the
 -- local Wayland clipboard when one is available, so content copied in other
--- apps remains pasteable; without a display, paste is an OSC 52 query that
--- tmux (or the terminal) answers.
+-- apps remains pasteable. Without a display, paste uses cached yanks: many
+-- terminals allow OSC 52 writes but block reads, causing queries to time out.
+-- Use the terminal's paste shortcut to insert text copied on the host.
 local M = {}
 
 local function proc_lines(pid, file)
@@ -54,10 +55,16 @@ function M.setup()
     and vim.fn.executable("wl-copy") == 1
     and vim.fn.executable("wl-paste") == 1
 
+  local cached = {
+    ["+"] = { {}, "v" },
+    ["*"] = { {}, "v" },
+  }
+
   local function copy(register)
     local emit = osc52.copy(register)
 
-    return function(lines)
+    return function(lines, regtype)
+      cached[register] = { vim.deepcopy(lines), regtype or "v" }
       if has_wayland then
         local cmd = { "wl-copy", "--sensitive", "--type", "text/plain" }
         if register == "*" then
@@ -74,7 +81,9 @@ function M.setup()
 
   local function paste(register)
     if not has_wayland then
-      return osc52.paste(register)
+      return function()
+        return vim.deepcopy(cached[register])
+      end
     end
 
     return function()
